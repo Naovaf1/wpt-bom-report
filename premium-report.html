@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="รายงาน Bill of Materials สำหรับ Wireless Power Transfer Alignment Prototype ระดับ 36W">
+    <meta name="color-scheme" content="light">
+    <title>WPT Alignment Prototype BOM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f4efe7;
+            --bg-accent: radial-gradient(circle at top left, rgba(212, 167, 98, 0.25), transparent 30%), linear-gradient(180deg, #fbf7f1 0%, #f4efe7 40%, #ece4d8 100%);
+            --surface: rgba(255, 252, 247, 0.88);
+            --surface-strong: #fffaf2;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --line: rgba(148, 163, 184, 0.28);
+            --brand: #0f766e;
+            --brand-strong: #115e59;
+            --accent: #c0841a;
+            --price: #047857;
+            --shadow: 0 24px 60px rgba(54, 45, 24, 0.12);
+            --radius-xl: 28px;
+            --radius-lg: 18px;
+            --radius-md: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Noto Sans Thai", sans-serif;
+            color: var(--text);
+            background: var(--bg-accent);
+            line-height: 1.65;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .page-shell {
+            width: min(1120px, calc(100vw - 32px));
+            margin: 0 auto;
+            padding: 32px 0 64px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.9fr);
+            gap: 20px;
+            align-items: stretch;
+            margin-bottom: 24px;
+        }
+
+        .hero-card,
+        .stats-card,
+        .report-card {
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            background: var(--surface);
+            backdrop-filter: blur(14px);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-card {
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::after {
+            content: "";
+            position: absolute;
+            inset: auto -60px -90px auto;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(15, 118, 110, 0.18), rgba(15, 118, 110, 0));
+            pointer-events: none;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            background: rgba(15, 118, 110, 0.08);
+            color: var(--brand-strong);
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            margin: 0;
+            font-family: "Sora", sans-serif;
+            font-size: clamp(2.1rem, 4vw, 3.6rem);
+            line-height: 1.08;
+            letter-spacing: -0.05em;
+        }
+
+        .subtitle {
+            margin: 16px 0 0;
+            max-width: 62ch;
+            font-size: 1.02rem;
+            color: var(--muted);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 0;
+            border-radius: 999px;
+            padding: 12px 18px;
+            font: inherit;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            color: #fff;
+            background: linear-gradient(135deg, var(--brand) 0%, #0f766e 45%, #0b5f72 100%);
+            box-shadow: 0 14px 30px rgba(15, 118, 110, 0.24);
+        }
+
+        .btn-secondary {
+            color: var(--brand-strong);
+            background: rgba(15, 118, 110, 0.08);
+        }
+
+        .stats-card {
+            border-radius: var(--radius-xl);
+            padding: 24px;
+            display: grid;
+            gap: 14px;
+        }
+
+        .stat {
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            border-radius: var(--radius-lg);
+            padding: 18px 18px 16px;
+        }
+
+        .stat-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .stat strong {
+            font-family: "Sora", sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: -0.03em;
+        }
+
+        .report-card {
+            border-radius: 32px;
+            padding: 28px;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .summary-tile {
+            padding: 18px 20px;
+            border-radius: 18px;
+            background: var(--surface-strong);
+            border: 1px solid var(--line);
+        }
+
+        .summary-tile span {
+            display: block;
+            color: var(--muted);
+            font-size: 0.92rem;
+            margin-bottom: 6px;
+        }
+
+        .summary-tile strong {
+            font-family: "Sora", sans-serif;
+            font-size: 1.35rem;
+            letter-spacing: -0.03em;
+        }
+
+        section + section {
+            margin-top: 34px;
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: baseline;
+            margin-bottom: 14px;
+        }
+
+        h2 {
+            margin: 0;
+            font-family: "Sora", sans-serif;
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
+            letter-spacing: -0.03em;
+        }
+
+        .section-note {
+            color: var(--muted);
+            font-size: 0.94rem;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        table {
+            width: 100%;
+            min-width: 760px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 14px 16px;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid var(--line);
+        }
+
+        th {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background: #f8f4ed;
+            color: #475569;
+            font-size: 0.92rem;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
+        tbody tr:hover td {
+            background: rgba(15, 118, 110, 0.035);
+        }
+
+        .item-title {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .price-col {
+            white-space: nowrap;
+            font-weight: 700;
+            color: var(--price);
+        }
+
+        .link-tag,
+        .link-tag-muted {
+            display: inline-flex;
+            align-items: center;
+            min-height: 34px;
+            border-radius: 999px;
+            padding: 6px 12px;
+            font-size: 0.86rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .link-tag {
+            color: var(--brand-strong);
+            background: rgba(15, 118, 110, 0.08);
+        }
+
+        .link-tag:hover {
+            background: rgba(15, 118, 110, 0.14);
+        }
+
+        .link-tag-muted {
+            color: var(--muted);
+            background: rgba(148, 163, 184, 0.14);
+        }
+
+        .footer-note {
+            margin-top: 28px;
+            padding: 18px 20px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(192, 132, 26, 0.08), rgba(15, 118, 110, 0.08));
+            border: 1px solid rgba(192, 132, 26, 0.15);
+            color: #5b6472;
+        }
+
+        .footer-note strong {
+            color: #1f2937;
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-head {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .page-shell {
+                width: min(100vw - 20px, 1120px);
+                padding-top: 12px;
+            }
+
+            .hero-card,
+            .stats-card,
+            .report-card {
+                border-radius: 22px;
+            }
+
+            .hero-card,
+            .report-card {
+                padding: 20px;
+            }
+
+            .stats-card {
+                padding: 18px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff;
+            }
+
+            .page-shell {
+                width: 100%;
+                padding: 0;
+            }
+
+            .hero-actions {
+                display: none;
+            }
+
+            .hero-card,
+            .stats-card,
+            .report-card,
+            .summary-tile,
+            .stat,
+            .footer-note {
+                box-shadow: none;
+                border: 1px solid #d1d5db;
+                background: #fff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page-shell">
+        <div class="hero">
+            <section class="hero-card">
+                <div class="eyebrow">Wireless Charger Alignment Thesis Report</div>
+                <h1>WPT Alignment Prototype BOM</h1>
+                <p class="subtitle">
+                    รายการวัสดุและอุปกรณ์สำหรับต้นแบบระบบจัดแนว Wireless Power Transfer ขนาด 36W
+                    จัดรูปแบบใหม่ให้เปิดผ่าน GitHub และ GitHub Pages ได้ง่ายขึ้น
+                </p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary" type="button" onclick="window.print()">Print / Save PDF</button>
+                    <a class="btn btn-secondary" href="#report">Jump to BOM</a>
+                </div>
+            </section>
+
+            <aside class="stats-card" aria-label="Report summary">
+                <div class="stat">
+                    <span class="stat-label">Project Scope</span>
+                    <strong>36W Prototype</strong>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Categories</span>
+                    <strong>4 Main Systems</strong>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Grand Total</span>
+                    <strong>8,093.53 บาท</strong>
+                </div>
+            </aside>
+        </div>
+
+        <article class="report-card" id="report">
+            <div class="section-grid">
+                <div class="summary-tile">
+                    <span>Drive & Mechanical System</span>
+                    <strong>3,679.84 ฿</strong>
+                </div>
+                <div class="summary-tile">
+                    <span>Sensing & Conditioning</span>
+                    <strong>2,622.98 ฿</strong>
+                </div>
+                <div class="summary-tile">
+                    <span>WPT System & Monitor</span>
+                    <strong>1,628.71 ฿</strong>
+                </div>
+                <div class="summary-tile">
+                    <span>Control Unit</span>
+                    <strong>162.00 ฿</strong>
+                </div>
+            </div>
+
+            <section>
+                <div class="section-head">
+                    <h2>1. ชุดขับเคลื่อนและโครงสร้างเชิงกล</h2>
+                    <div class="section-note">รวม 7 รายการ</div>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>รายการ</th>
+                                <th>รุ่น/สเปก</th>
+                                <th>หน้าที่/ความจำเป็น</th>
+                                <th>จำนวน</th>
+                                <th>ราคารวม</th>
+                                <th>อ้างอิง</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="item-title">1.1 Lead Screw Set</span></td>
+                                <td>T8 Lead Screw 8mm (KP08-300mm-V) + Anti-Backlash Nut</td>
+                                <td>แปลงการหมุนมอเตอร์เป็นการเลื่อน (Travel 200mm)</td>
+                                <td>2 ชุด</td>
+                                <td class="price-col">560.00 ฿</td>
+                                <td><a href="https://www.ortech-online.com/product/4343/" class="link-tag">Ortech</a></td>
+                            </tr>
+                            <tr>
+                                <td><span class="item-title">1.2 V-Slot Gantry Plate</span></td>
+                                <td>Openbuilds 2040 Gantry Plate + V-Wheel Set</td>
+                                <td>ฐานรองขดลวด Tx และทำหน้าที่สไลด์ไปบนอลูมิเนียม</td>
+                                <td>2 ชิ้น</td>
+                                <td class="price-col">770.00 ฿</td>
+                                <td><a href="https://shopee.co.th/product/252491788/16388593202" class="link-tag">Shopee</a></td>
+                            </tr>
+                            <tr>
+                                <td><span class="item-title">1.3 V-Slot Alu Profile</span></td>
+                                <td>V-Slot อลูมิเนียมโปรไฟล์ 2040 (300mm)</td>
+                                <td>ประกอบเป็นกรอบ 4 เส้น และแกนวิ่ง 1 เส้น</td>
+                                <td>5 เส้น</td>
+                                <td class="price-col">~600.00 ฿</td>
+                                <td><a href="https://www.guenter.co.th/product/alpc-24-vsb/" class="link-tag">Guenter</a></td>
+                            </tr>
+                            <tr>
+                                <td><span class="item-title">1.4 NEMA 23 Bracket</span></td>
+                                <td>ฉากสเตปเปอร์ NEMA 23</td>
+                                <td>ยึดตัวมอเตอร์ให้ติดกระชับกับโครงอลูมิเนียม</td>
+                                <td>2 ชิ้น</td>
+                                <td class="price-col">92.00 ฿</td>
+                                <td><a href="https://www.zonemaker.com/product/684/nema23-mounting-l-bracket-for-stepper-motor" class="link-tag">Zonemaker</a></td>
+                            </tr>
+                            <tr>
+                                <td><span class="item-title">1.5 Stepper + Driver</span></td>
+                                <td>NEMA23 (23HS5630) 3A + TB6600</td>
+                                <td>มอเตอร์ขับเคลื่อนแกน X และ Y</td>
+                                <td>2 ชุด</td>
+                                <td class="price-col">1,307.84 ฿</td>
+                                <td><a href="https://www.lazada.co.th/products/flash-sale-nema23-23hs5630-stepper-motor-57-motor-3a-with-tb6600-stepper-motor-driver-nema17-23-for-cnc-and-3d-printer-i5258310643-s22342561290.html" class="link-tag">Lazada</a></td>
+                            </tr>
+                            <tr>
+                                <td><span class="item-title">1.6 Limit Switch</span></td>
+                                <td>Micro Limit Switch (Mechanical)</td>
+                                <td>สำหรับทำ Homing (0,0) และป้องกันการชนเฟรม</td>
+                                <td>4 ชิ้น</td>
+                                <td class="price-col">100.00 ฿</td>
+                                <td><a href="https://www.genlogic.co.th/product/729/3d-printer-endstop-switch-ramps-1-4-mechanical-limit-switch-" class="link-tag">Genlogic</a></td>
+                            </tr>
+                            <tr>
+                                <td><span class="item-title">1.7 Mounting Hardware</span></td>
+                                <td>T-Nut M5 + สกรู M5 + Bracket + Standoff</td>
+                                <td>ใช้ประกอบโครงสร้างและยึดอุปกรณ์</td>
+                                <td>1 ชุด</td>
+                                <td class="price-col">~150.00 ฿</td>
+                                <td><a href="https://shopee.co.th/search?keyword=t-nut%20m5%202020" class="link-tag">Shopee</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <div class="section-head">
+                    <h2>2. ชุดวัดสนามแม่เหล็กและขยายสัญญาณ</h2>
+                    <div class="section-note">รวม 3 รายการ</div>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>รายการ</th>
+                                <th>รุ่น/สเปก</th>
+                                <th>หน้าที่/ความจำเป็น</th>
+                                <th>จำนวน</th>
+                                <th>ราคารวม</th>
+                                <th>อ้างอิง</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="item-title">2.1 GMR Sensor</span></td>
+                                <td>AA002-02E (NVE Corp)</td>
+                                <td>วัดสนามแม่เหล็ก Bz สำหรับ PINN Spatial Mapping</td>
+                                <td>3 ชิ้น</td>
+                                <td class="price-col">2,062.98 ฿</td>
+                                <td><a href="https://www.digikey.co.th/th/products/detail/nve-corp-sensor-products/AA002-02E/1624601" class="link-tag">Digikey</a></td>
+                            </tr>
+                            <tr>
+                                <td><span class="item-title">2.2 Instrumentation Amp</span></td>
+                                <td>INA126UA / 2K5</td>
+                                <td>ขยายสัญญาณ mV จาก GMR เป็น 0-3.3V</td>
+                                <td>3 ชิ้น</td>
+                                <td class="price-col">~365.00 ฿</td>
+                                <td><a href="https://www.digikey.com/en/products/detail/texas-instruments/INA126UA-2K5/300994" class="link-tag">Digikey</a></td>
+                            </tr>
+                            <tr>
+                                <td><span class="item-title">2.3 External ADC</span></td>
+                                <td>ADS1115 (16-bit I2C)</td>
+                                <td>แปลงสัญญาณดิจิทัลความละเอียดสูง</td>
+                                <td>1 ชิ้น</td>
+                                <td class="price-col">45.00 ฿</td>
+                                <td><a href="https://www.allnewstep.com/product/2677/ads1115-i2c-adc-4-channel-16-bit-with-programmable-gain-amplifier-module-2" class="link-tag">Allnewstep</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <div class="section-head">
+                    <h2>3. ชุดพลังงาน WPT และโหลดมอนิเตอร์</h2>
+                    <div class="section-note">รวม 3 รายการ</div>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>รายการ</th>
+                                <th>รุ่น/สเปก</th>
+                                <th>หน้าที่/ความจำเป็น</th>
+                                <th>จำนวน</th>
+                                <th>ราคารวม</th>
+                                <th>อ้างอิง</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="item-title">3.1 WPT Module Kit</span></td>
+                                <td>Inverter + Rectifier + Tx/Rx Coils</td>
+                                <td>ระบบถ่ายโอนพลังงานไร้สายหลัก</td>
+                                <td>1 ชุด</td>
+                                <td class="price-col">804.54 ฿</td>
+                                <td><a href="https://th.aliexpress.com/item/1005003777900223.html" class="link-tag">AliExpress</a></td>
+                            </tr>
+                            <tr>
+                                <td><span class="item-title">3.2 DC Power Supply</span></td>
+                                <td>FKSI 480W (0-48V 10A)</td>
+                                <td>แหล่งจ่ายไฟ DC หลักสำหรับระบบทั้งหมด</td>
+                                <td>1 ชิ้น</td>
+                                <td class="price-col">764.17 ฿</td>
+                                <td><a href="https://th.aliexpress.com/item/1005005979396066.html" class="link-tag">AliExpress</a></td>
+                            </tr>
+                            <tr>
+                                <td><span class="item-title">3.3 Monitoring Sensor</span></td>
+                                <td>INA219 (I2C)</td>
+                                <td>วัดแรงดัน Voc และกระแสเป็น Feedback</td>
+                                <td>1 ชิ้น</td>
+                                <td class="price-col">60.00 ฿</td>
+                                <td><a href="https://www.buraphatronics.com/product/600/ina219-power-sensor-module" class="link-tag">Buraphatronics</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <div class="section-head">
+                    <h2>4. ส่วนควบคุมและการประมวลผล</h2>
+                    <div class="section-note">รวม 1 รายการ</div>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>รายการ</th>
+                                <th>รุ่น/สเปก</th>
+                                <th>หน้าที่/ความจำเป็น</th>
+                                <th>จำนวน</th>
+                                <th>ราคารวม</th>
+                                <th>อ้างอิง</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="item-title">4.1 Microcontroller</span></td>
+                                <td>ESP32 DevKit V1 (30 Pins)</td>
+                                <td>รัน PINN Observer และควบคุมมอเตอร์</td>
+                                <td>1 ชิ้น</td>
+                                <td class="price-col">162.00 ฿</td>
+                                <td><span class="link-tag-muted">Reference pending</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <div class="footer-note">
+                <strong>หมายเหตุ:</strong>
+                ราคานี้ยังไม่รวมค่าจัดส่ง และอาจมีการเปลี่ยนแปลงตามโปรโมชั่นของแต่ละร้านค้า
+            </div>
+        </article>
+    </main>
+</body>
+</html>
