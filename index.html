@@ -101,13 +101,6 @@
             transform: translateY(-1px);
         }
 
-        .mobile-hint {
-            margin: -4px 0 18px;
-            color: var(--text-muted);
-            font-size: 0.92rem;
-            text-align: right;
-        }
-
         .report-card {
             background: var(--card-bg);
             backdrop-filter: blur(10px);
@@ -272,11 +265,6 @@
                 width: 100%;
             }
 
-            .mobile-hint {
-                text-align: left;
-                margin-bottom: 14px;
-            }
-
             .report-card {
                 padding: 18px 14px;
                 border-radius: 16px;
@@ -399,7 +387,7 @@
                 backdrop-filter: none;
             }
 
-            .actions, .mobile-hint, .mobile-summary {
+            .actions, .mobile-summary {
                 display: none;
             }
 
@@ -481,16 +469,6 @@
             <h1>WPT Alignment Prototype</h1>
             <p class="subtitle">Bill of Materials - Scale 36W (Official Thesis Report)</p>
         </header>
-
-        <div class="actions">
-            <button class="btn btn-primary" type="button" onclick="handlePrint(event)">
-                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
-                Print to PDF
-            </button>
-            <a class="btn btn-secondary" href="wpt-bom-report.pdf" download>Download PDF</a>
-        </div>
-
-        <p class="mobile-hint">บนมือถือ ถ้าปุ่มพิมพ์ไม่ทำงาน ให้ใช้ปุ่ม Download PDF แทน</p>
 
         <div class="report-card">
             <div class="mobile-summary">เวอร์ชันมือถือจะแสดงแต่ละรายการเป็นการ์ดเพื่อให้อ่านง่ายขึ้น</div>
@@ -715,24 +693,5 @@
         </div>
     </div>
 
-    <script>
-        function handlePrint(event) {
-            if (event) {
-                event.preventDefault();
-            }
-
-            try {
-                window.print();
-            } catch (error) {
-                window.location.href = "wpt-bom-report.pdf";
-            }
-
-            setTimeout(function () {
-                if (document.visibilityState === "visible") {
-                    return;
-                }
-            }, 500);
-        }
-    </script>
 </body>
 </html>
