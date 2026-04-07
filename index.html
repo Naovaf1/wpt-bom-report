@@ -372,13 +372,106 @@
         }
 
         @media print {
-            body { background: white; padding: 0; }
-            .report-card { box-shadow: none; border: none; padding: 0; }
-            .actions, .mobile-hint, .mobile-summary { display: none; }
-            .container { max-width: 100%; }
-            .summary-box { break-inside: avoid; }
-            h2 { break-after: avoid; }
-            tr { break-inside: avoid; }
+            :root {
+                --primary: #1e3a8a;
+                --text-main: #111827;
+                --text-muted: #374151;
+                --border: #9ca3af;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            body {
+                background: white;
+                color: #111827;
+                padding: 0;
+                font-size: 11pt;
+            }
+
+            .report-card {
+                background: white;
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                backdrop-filter: none;
+            }
+
+            .actions, .mobile-hint, .mobile-summary {
+                display: none;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+
+            header {
+                margin-bottom: 18pt;
+            }
+
+            h1 {
+                color: #111827;
+                font-size: 22pt;
+            }
+
+            .subtitle,
+            .note,
+            .category-summary {
+                color: #374151;
+            }
+
+            h2 {
+                color: #1e3a8a;
+                border-bottom: 1.5pt solid #cbd5e1;
+                break-after: avoid;
+            }
+
+            h2::before {
+                background: #1e3a8a;
+            }
+
+            table {
+                font-size: 10pt;
+            }
+
+            th {
+                background: #e5e7eb;
+                color: #111827;
+                border-bottom: 1.5pt solid #9ca3af;
+            }
+
+            td {
+                color: #111827;
+                border-bottom: 1pt solid #d1d5db;
+            }
+
+            .price-col {
+                color: #166534;
+                font-weight: 700;
+            }
+
+            .link-tag {
+                background: transparent;
+                color: #1d4ed8;
+                border: 1pt solid #bfdbfe;
+            }
+
+            .summary-box {
+                background: #f8fafc;
+                border-left: 4pt solid #1e3a8a;
+                break-inside: avoid;
+            }
+
+            .total-row {
+                color: #111827;
+                border-top: 1.5pt solid #9ca3af;
+            }
+
+            tr {
+                break-inside: avoid;
+            }
         }
     </style>
 </head>
